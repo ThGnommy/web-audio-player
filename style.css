@@ -134,6 +134,15 @@ svg:active {
     transform: scale(1);
 }
 
+li {
+    background-color: white;
+    cursor: pointer;
+}
+
+#bkg-cyan {
+    background-color: cyan;
+}
+
 /* STYLE THE INPUTS */
 
 input[type=range].bua {

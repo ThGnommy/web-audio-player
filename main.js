@@ -20,9 +20,26 @@ fileSelector.addEventListener('change', (event) => {
     fileName = files[0].name
     audioClip.src = URL.createObjectURL(files[0]);
     
+    const trackList = document.getElementById('track-list')
+
     for (let i = 0; i < files.length; i++) {
         const element = files[i];
+        const url = URL.createObjectURL(element)
         console.log(URL.createObjectURL(element))
+
+        const li = document.createElement('li') 
+        li.innerHTML = element.name
+        li.className = url
+        trackList.append(li)
+
+        li.addEventListener('click', (e) => {
+            const allLi = document.querySelectorAll('li')
+            allLi.forEach(element => {
+                element.setAttribute('id', '')
+            });
+            e.target.setAttribute('id', 'bkg-cyan')
+            audioClip.src = e.target.className
+        })
     }
 
 });
