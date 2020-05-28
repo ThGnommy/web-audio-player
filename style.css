@@ -1,0 +1,227 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 60vw;
+    border: 1px solid black;
+    border-right: none;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 15vh;
+    border: 5px solid black;
+    background-color: burlywood;
+}
+
+.controls > section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.s-left, .mid-section, .s-right {
+    display: flex;
+    width: 30vw;
+    background-color: darkorange;
+}
+
+.body {
+    display: flex;
+    height: 40vh;
+    border: 6px solid black;
+
+}
+
+.body > div:nth-child(-n+2) {
+    border-right: 5px solid black;
+}
+
+.circle-s-1, .circle-r-1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 5px solid black;
+    background-color: burlywood;
+}
+
+.circle-s-2, .circle-r-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+.circle-s-3, .circle-r-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 8px solid black;
+    background-color: darkorange;
+}
+
+.mid-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: darkorange;
+}
+
+.buttons {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.gurzo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    border: 5px solid black;
+    border-radius: 50px;
+    /* margin-bottom: 30px; */
+    background-color: burlywood;
+}
+
+.gurzo * {
+    margin: 0 10px;
+    background-color: darkorange;
+
+}
+
+.gurzino-1 {
+    width: 20px;
+    height: 20px;
+    border: 3px solid black;
+    border-radius: 50px;
+}
+
+.gurzino-2 {
+    width: 20px;
+    height: 20px;
+    border: 3px solid black;
+    border-radius: 50px;
+}
+
+svg {
+    cursor: pointer!important;
+    transition: all .2s;
+}
+
+svg:hover {
+    transform: scale(1.2);
+}
+
+svg:active {
+    transform: scale(1);
+}
+
+/* STYLE THE INPUTS */
+
+input[type=range].bua {
+  -webkit-appearance: none;
+  width: 100%;
+  margin: 6px 0;
+}
+input[type=range].bua:focus {
+  outline: none;
+}
+input[type=range].bua::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 15px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  background: #000000;
+  border-radius: 0px;
+  border: 2.3px solid #010101;
+}
+input[type=range].bua::-webkit-slider-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 2px solid #000000;
+  height: 27px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ff8c00;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -8.3px;
+}
+input[type=range].bua:focus::-webkit-slider-runnable-track {
+  background: #000000;
+}
+input[type=range].bua::-moz-range-track {
+  width: 100%;
+  height: 15px;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+  background: #000000;
+  border-radius: 0px;
+  border: 2.3px solid #010101;
+}
+input[type=range].bua::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 2px solid #000000;
+  height: 27px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ff8c00;
+  cursor: pointer;
+}
+input[type=range].bua::-ms-track {
+  width: 100%;
+  height: 15px;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range].bua::-ms-fill-lower {
+  background: #000000;
+  border: 2.3px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+input[type=range].bua::-ms-fill-upper {
+  background: #000000;
+  border: 2.3px solid #010101;
+  border-radius: 0px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0), 0px 0px 1px rgba(13, 13, 13, 0);
+}
+input[type=range].bua::-ms-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 2px solid #000000;
+  height: 27px;
+  width: 16px;
+  border-radius: 3px;
+  background: #ff8c00;
+  cursor: pointer;
+  height: 15px;
+}
+input[type=range].bua:focus::-ms-fill-lower {
+  background: #000000;
+}
+input[type=range].bua:focus::-ms-fill-upper {
+  background: #000000;
+}
+
+#file-selector {
+    margin-top: 50px;
+}

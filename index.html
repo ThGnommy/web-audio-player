@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <title>Web Audio Api</title>
+</head>
+<body>
+
+    <section class="container">
+        <div class="controls">
+
+            <section class="volume">
+                <input id='vol' class="bua" type="range" min='0' max='2' value="1" step='0.01' />
+                <label>VOL</label>
+            </section>
+
+            <section class="pan">
+                <input type="range" id="pan" class="bua" min="-1" max="1" value="0" step="0.01">
+                <label>PAN</label>
+            </section>
+
+
+        </div>
+        <div class="body">
+            <div class="s-left">
+                <div class="circle-s-1">
+                    <div class="circle-s-2">
+                        <div class="circle-s-3"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mid-section">
+                <div class="gurzo">
+                    <div class="gurzino-1"></div>
+                    <div class="gurzino-2"></div>
+                </div>
+                <div class="buttons">
+                    <i id="play" class="fas fa-play fa-2x" onclick="Play()"></i>
+                    <i id="pause" class="fas fa-pause fa-2x" onclick="Resume()" ></i>
+                    <i id="stop" class="fas fa-stop fa-2x" onclick="Stop()"></i>
+                    <audio src="" type="audio/mpeg"></audio>
+                </div>
+            </div>
+
+            <div class="s-right">
+                <div class="circle-r-1">
+                    <div class="circle-r-2">
+                        <div class="circle-r-3"></div>
+                    </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    <input type="file" id="file-selector" accept=".mp3, .wav, .flac, .m4a" multiple>
+
+    <script src="main.js"></script>
+</body>
+</html>
