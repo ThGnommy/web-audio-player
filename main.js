@@ -39,20 +39,32 @@ fileSelector.addEventListener('change', (event) => {
 
 });
 
+
+let requestAnimationFrameID;
+audioContext.suspend();
+
 const Play = (e) => {
-    audioClip.play();
-    setInterval(ReadFrequencyData, 1);
+    if(audioContext.state === 'suspended') {
+        audioContext.resume();
+        audioClip.play();
+        ReadFrequencyData();
+    }
 }
 
 const Resume = (e) => {
     audioClip.pause();
+    audioContext.suspend();
+    Reset();
 }
 
 const Stop = (e) => {
     audioClip.pause();
     audioClip.currentTime = 0;
 
-
+    if(audioContext.state === 'running') {
+        audioContext.suspend()
+        Reset();
+    }
 }
 
 const gainNode = audioContext.createGain();
@@ -89,24 +101,56 @@ track.connect(gainNode)
 const circle1 = document.getElementsByClassName('circle-s-2')[0]
 const circle2 = document.getElementsByClassName('circle-r-2')[0]
 
+const m_circle1 = document.getElementsByClassName('circle-s-3')[0]
+const m_circle2 = document.getElementsByClassName('circle-r-3')[0]
+
+
 const ReadFrequencyData = () => {
 
     analyserNode.getFloatFrequencyData(dataArray)
 
     let n = 0
+    let n2 = 0
 
     dataArray.forEach((element) => {
-
         element = Math.floor(element.toFixed(0))
-        n += -element / 100
+
+        n += -element / 150
         n.toFixed(0)
-        console.log(n)
+
+        n2 += -element / 1500
+        n2.toFixed(0)
     })
+
+    requestAnimationFrameID = requestAnimationFrame(ReadFrequencyData)
 
     circle1.style.width = `${n}px`;
     circle1.style.height = `${n}px`;
-
     circle2.style.width = `${n}px`;
     circle2.style.height = `${n}px`;
+
+    m_circle1.style.borderWidth = `${n2}px`;
+    m_circle2.style.borderWidth = `${n2}px`;
+
+    if(audioClip.ended) {
+        Reset()
+    }
+}
+
+const Reset = () => {
+
+    audioContext.suspend()
+
+    if(audioContext.state === 'suspended') {
+        cancelAnimationFrame(requestAnimationFrameID);
+    }
+
+    circle1.style.width = '150px';
+    circle1.style.height = '150px';
+    circle2.style.width = '150px';
+    circle2.style.height = '150px';
+
+    m_circle1.style.borderWidth = '8px';
+    m_circle2.style.borderWidth = '8px';
 }
 
