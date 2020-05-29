@@ -134,13 +134,25 @@ svg:active {
     transform: scale(1);
 }
 
-li {
-    background-color: white;
-    cursor: pointer;
+ul {
+  list-style-type: none;
+  margin: 20 0 0 0;
+  padding: 0;
+  width: 60vw;
 }
+
+li {
+    cursor: pointer;
+    padding: 10px;
+    border: 1px solid black;
+    margin: 5px 0;
+}
+
 
 #bkg-cyan {
     background-color: cyan;
+    margin-left: 20px;
+    transition: ease-in .4s;
 }
 
 /* STYLE THE INPUTS */

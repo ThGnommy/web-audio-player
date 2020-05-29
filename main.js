@@ -4,16 +4,11 @@ const fileSelector = document.getElementById('file-selector');
 
 let fileName = ''
 
-let trackArray = []
-
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioContext = new AudioContext();
 
-const analyser = audioContext.createAnalyser();
-
 const audioClip = document.querySelector('audio')
 const track = audioContext.createMediaElementSource(audioClip)
-track.connect(analyser);
 
 fileSelector.addEventListener('change', (event) => {
     const files = event.target.files;
@@ -46,6 +41,7 @@ fileSelector.addEventListener('change', (event) => {
 
 const Play = (e) => {
     audioClip.play();
+    setInterval(ReadFrequencyData, 1);
 }
 
 const Resume = (e) => {
@@ -55,6 +51,8 @@ const Resume = (e) => {
 const Stop = (e) => {
     audioClip.pause();
     audioClip.currentTime = 0;
+
+
 }
 
 const gainNode = audioContext.createGain();
@@ -76,6 +74,39 @@ pannerControl.addEventListener('input', function() {
     panner.pan.value = this.value;
 }, false);
 
+
+const analyserNode = audioContext.createAnalyser();
+analyserNode.fftSize = 256;
+const bufferLength = analyserNode.frequencyBinCount;
+const dataArray = new Float32Array(bufferLength);
+
 track.connect(gainNode)
+.connect(analyserNode)
 .connect(panner)
 .connect(audioContext.destination);
+
+
+const circle1 = document.getElementsByClassName('circle-s-2')[0]
+const circle2 = document.getElementsByClassName('circle-r-2')[0]
+
+const ReadFrequencyData = () => {
+
+    analyserNode.getFloatFrequencyData(dataArray)
+
+    let n = 0
+
+    dataArray.forEach((element) => {
+
+        element = Math.floor(element.toFixed(0))
+        n += -element / 100
+        n.toFixed(0)
+        console.log(n)
+    })
+
+    circle1.style.width = `${n}px`;
+    circle1.style.height = `${n}px`;
+
+    circle2.style.width = `${n}px`;
+    circle2.style.height = `${n}px`;
+}
+
