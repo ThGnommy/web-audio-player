@@ -32,11 +32,13 @@ fileSelector.addEventListener('change', (event) => {
             allLi.forEach(element => {
                 element.setAttribute('id', '')
             });
-            e.target.setAttribute('id', 'bkg-cyan')
-            audioClip.src = e.target.className
 
-            if(audioClip.src === e.target.className) {
-                Reset()
+            e.target.setAttribute('id', 'bkg-cyan')
+
+            if(e.target.className === audioClip.src) {
+                return;
+            } else if(e.target.className != audioClip.src) {
+                Reset();
             }
 
             audioClip.src = e.target.className
@@ -80,9 +82,17 @@ const volumeControl = document.getElementById('vol');
 
 volumeControl.addEventListener('input', function() {
     gainNode.gain.value = this.value;
-    
-}, false);
 
+    if(gainNode.gain.value === 0) {
+        Reset()
+    } else if (gainNode.gain.value > 0) {
+        audioContext.resume()
+        audioClip.play()
+        ReadFrequencyData();
+    }
+
+
+}, false);
 
 const pannerOptions = { pan: 0 };
 const panner = new StereoPannerNode(audioContext, pannerOptions);
@@ -122,7 +132,7 @@ const ReadFrequencyData = () => {
     dataArray.forEach((element) => {
         element = Math.floor(element.toFixed(0))
 
-        n += -element / 150
+        n += -element / 120
         n.toFixed(0)
 
         n2 += -element / 1500
