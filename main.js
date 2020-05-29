@@ -10,12 +10,24 @@ const audioContext = new AudioContext();
 const audioClip = document.querySelector('audio')
 const track = audioContext.createMediaElementSource(audioClip)
 
+fileSelector.addEventListener('click', (e) => {
+    audioClip.pause();
+    audioClip.currentTime = 0;
+
+    if(audioContext.state === 'running') {
+        audioContext.suspend()
+        Reset();
+    }
+})
+
 fileSelector.addEventListener('change', (event) => {
     const files = event.target.files;
     fileName = files[0].name
     audioClip.src = URL.createObjectURL(files[0]);
     
     const trackList = document.getElementById('track-list')
+
+
 
     for (let i = 0; i < files.length; i++) {
         const element = files[i];
@@ -58,6 +70,10 @@ const Play = (e) => {
         audioClip.play();
         ReadFrequencyData();
     }
+
+    if(fileName === '') {
+        alert('No track selected...')
+    }
 }
 
 const Resume = (e) => {
@@ -85,12 +101,13 @@ volumeControl.addEventListener('input', function() {
 
     if(gainNode.gain.value === 0) {
         Reset()
-    } else if (gainNode.gain.value > 0) {
+    }
+
+    else if (gainNode.gain.value > 0 && audioContext.state === 'suspended' && audioClip.currentTime != 0) {
         audioContext.resume()
         audioClip.play()
         ReadFrequencyData();
     }
-
 
 }, false);
 
@@ -135,7 +152,7 @@ const ReadFrequencyData = () => {
         n += -element / 120
         n.toFixed(0)
 
-        n2 += -element / 1500
+        n2 += -element / 2000
         n2.toFixed(0)
     })
 
@@ -171,3 +188,17 @@ const Reset = () => {
     m_circle2.style.borderWidth = '8px';
 }
 
+const VolZero = () => {
+
+    if(audioContext.state === 'running') {
+        cancelAnimationFrame(requestAnimationFrameID);
+    }
+
+    circle1.style.width = '150px';
+    circle1.style.height = '150px';
+    circle2.style.width = '150px';
+    circle2.style.height = '150px';
+
+    m_circle1.style.borderWidth = '8px';
+    m_circle2.style.borderWidth = '8px';
+}
