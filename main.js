@@ -34,6 +34,13 @@ fileSelector.addEventListener('change', (event) => {
             });
             e.target.setAttribute('id', 'bkg-cyan')
             audioClip.src = e.target.className
+
+            if(audioClip.src === e.target.className) {
+                Reset()
+            }
+
+            audioClip.src = e.target.className
+
         })
     }
 
