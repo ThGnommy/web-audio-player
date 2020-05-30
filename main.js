@@ -126,11 +126,26 @@ analyserNode.fftSize = 256;
 const bufferLength = analyserNode.frequencyBinCount;
 const dataArray = new Float32Array(bufferLength);
 
-track.connect(gainNode)
-.connect(analyserNode)
+const biquadFilter = audioContext.createBiquadFilter();
+const convolver = audioContext.createConvolver();
+
+const sliderLowpass = document.getElementById('lowpass')
+
+track.connect(analyserNode)
 .connect(panner)
+.connect(biquadFilter)
+// .connect(convolver)
+.connect(gainNode)
 .connect(audioContext.destination);
 
+biquadFilter.type = 'lowpass'
+
+sliderLowpass.addEventListener('input', function() {
+    biquadFilter.frequency.value = this.value
+    console.log(this.value)
+}, false)
+
+biquadFilter.frequency.value = 50
 
 const circle1 = document.getElementsByClassName('circle-s-2')[0]
 const circle2 = document.getElementsByClassName('circle-r-2')[0]
